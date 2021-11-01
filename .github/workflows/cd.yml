@@ -21,7 +21,6 @@ jobs:
           mkdir -p ~/.ssh/
           echo "${{secrets.SSH_PRIVATE_GITHUB_KEY}}" > ~/.ssh/id_rsa.github
           sudo chmod 600 ~/.ssh/id_rsa.github
-          echo "Host github.com \n\t IdentityFile ~/.ssh/id_rsa.github \n\t IdentitiesOnly yes" >> ~/.ssh/config
       - name: Git config
         run: |
           git config --global user.email "cd-user@my-app.com"
