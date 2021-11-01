@@ -11,9 +11,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Use SHH Key
+        run: |
+          mkdir -p ~/.shh/
+          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.shh/id_rsa
+          sudo chmod 600 ~/.shh/id_rsa
+      - name: Git config
+        run: |
+          git config --global user.email "wiho80@gmail.com"
+          git config --global user.name "cd-user"
       - name: Install
         run: npm install
       - name: build
         run: npm run build
       - name: Deploy
-        run: npm run deploy
+        run: npm run deploy -- -r git@github.com:Pachon10/Modulo7.git
